@@ -1,0 +1,44 @@
+package com.booking.bookingApp.controller;
+
+import com.booking.bookingApp.entity.Review;
+import com.booking.bookingApp.service.ReviewService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/reviews")
+public class ReviewController {
+    private final ReviewService reviewService;
+
+    @GetMapping
+    public ResponseEntity<List<Review>> getReviews() {
+        return ResponseEntity.ok(reviewService.findAllReviews());
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Review> getReviewById(@PathVariable Long id) {
+        return ResponseEntity.ok(reviewService.findReviewById(id));
+    }
+
+    @GetMapping("/product/{id}")
+    public ResponseEntity<List<Review>> getReviewsByProduct(@PathVariable Long id) {
+        return ResponseEntity.ok(reviewService.findReviewsByProductId(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Review> postReview(@RequestBody Review review) {
+        return ResponseEntity.ok(reviewService.saveReview(review));
+    }
+
+    @DeleteMapping("/id/{id}")
+    public ResponseEntity<String> deleteReview(@PathVariable Long id) {
+        reviewService.deleteReview(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Review with id: " + id + " has been deleted.");
+    }
+}
+

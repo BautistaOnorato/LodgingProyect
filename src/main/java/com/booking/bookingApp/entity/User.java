@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,10 +31,10 @@ public class User {
     @Column
     private String phone;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Favourite> favourites;
-    @OneToMany(mappedBy = "client")
-    private Set<Reservation> reservations;
-    @OneToMany(mappedBy = "user")
-    private Set<Review> reviews;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Favourite> favourites = new HashSet<>();
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private Set<Reservation> reservations = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Review> reviews = new HashSet<>();
 }

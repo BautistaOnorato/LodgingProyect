@@ -1,0 +1,15 @@
+version: "3.3"
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_TCP_PORT: 3307
+      MYSQL_DATABASE: 'bookingApi-dev'
+      MYSQL_USER: 'usr-bookingApi'
+      MYSQL_PASSWORD: 'pwd-bookingApi'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3307:3307'
+    expose:
+      - '3307'

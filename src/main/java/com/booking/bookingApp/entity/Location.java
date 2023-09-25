@@ -1,5 +1,6 @@
 package com.booking.bookingApp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,5 +33,6 @@ public class Location {
     private Double longitude;
 
     @OneToOne(mappedBy = "location")
+    @JsonIgnore
     private Product product;
 }

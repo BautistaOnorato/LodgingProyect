@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,40 +28,60 @@ public class Product {
     @Column
     private String cancellationPolicy;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "product")
-    private Set<Security> securities;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<Security> securities = new HashSet<>();
 
-    @OneToMany(mappedBy = "product")
-    private Set<Rule> rules;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<Rule> rules = new HashSet<>();
 
-    @OneToMany(mappedBy = "product")
-    private Set<Reservation> reservations;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<Reservation> reservations = new HashSet<>();
 
-    @OneToMany(mappedBy = "product")
-    private Set<SocialNetwork> socialNetworks;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<SocialNetwork> socialNetworks = new HashSet<>();
 
-    @OneToMany(mappedBy = "product")
-    private Set<Review> reviews;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<Review> reviews = new HashSet<>();
 
-    @OneToMany(mappedBy = "product")
-    private Set<Favourite> favourites;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<Favourite> favourites = new HashSet<>();
 
-    @OneToMany(mappedBy = "product")
-    private Set<Image> images;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<Image> images = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "product_x_characteristic",
         joinColumns = { @JoinColumn(name = "product_id") },
         inverseJoinColumns = { @JoinColumn(name = "characteristic_id") }
     )
-    private Set<Characteristic> characteristics;
+    private Set<Characteristic> characteristics = new HashSet<>();
+
+    public void removeImage(Image image) {
+        this.images.remove(image);
+        image.setProduct(null);
+    }
+
+    public void removeSecurity(Security security) {
+        this.securities.remove(security);
+        security.setProduct(null);
+    }
+
+    public void removeRule(Rule rule) {
+        this.rules.remove(rule);
+        rule.setProduct(null);
+    }
+
+    public void removeSocialNetwork(SocialNetwork socialNetwork) {
+        this.socialNetworks.remove(socialNetwork);
+        socialNetwork.setProduct(null);
+    }
 
 }

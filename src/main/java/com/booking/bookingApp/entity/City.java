@@ -1,11 +1,13 @@
 package com.booking.bookingApp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -25,6 +27,7 @@ public class City {
     @Column
     private String city;
 
-    @OneToMany(mappedBy = "city")
-    private Set<Location> locations;
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Location> locations = new HashSet<>();
 }

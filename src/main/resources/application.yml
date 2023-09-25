@@ -1,0 +1,15 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: booking-api
+  datasource:
+    url: jdbc:mysql://localhost:3307/bookingApi-dev
+    username: usr-bookingApi
+    password: pwd-bookingApi
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
