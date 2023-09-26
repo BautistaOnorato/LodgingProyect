@@ -1,5 +1,6 @@
 package com.booking.bookingApp.controller;
 
+import com.booking.bookingApp.dto.ReservationDto;
 import com.booking.bookingApp.entity.Reservation;
 import com.booking.bookingApp.service.ReservationService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/reservationss")
+@RequestMapping("/reservations")
 public class ReservationController {
     private final ReservationService reservationsService;
 
@@ -21,12 +22,12 @@ public class ReservationController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
+    public ResponseEntity<ReservationDto> getReservationById(@PathVariable Long id) {
         return ResponseEntity.ok(reservationsService.findReservationById(id));
     }
 
     @GetMapping("/client/{id}")
-    public ResponseEntity<List<Reservation>> getReservationsByClientId(@PathVariable Long id) {
+    public ResponseEntity<List<ReservationDto>> getReservationsByClientId(@PathVariable Long id) {
         return ResponseEntity.ok(reservationsService.findReservationsByClientId(id));
     }
 

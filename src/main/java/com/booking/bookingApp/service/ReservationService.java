@@ -1,12 +1,16 @@
 package com.booking.bookingApp.service;
 
+import com.booking.bookingApp.dto.ReservationDto;
+import com.booking.bookingApp.dto.ShortProductDto;
 import com.booking.bookingApp.entity.Reservation;
 import com.booking.bookingApp.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -23,10 +27,10 @@ public class ReservationService {
         } else return null;
     }
 
-    public Reservation findReservationById(Long id) {
+    public ReservationDto findReservationById(Long id) {
         Optional<Reservation> response = reservationRepository.findById(id);
         if (response.isPresent()) {
-            return response.get();
+            return reservationToReservationDto(response.get());
         } else return null;
     }
 
@@ -34,11 +38,35 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
-    public List<Reservation> findReservationsByClientId(Long id) {
-        return reservationRepository.findByClientId(id);
+    public List<ReservationDto> findReservationsByClientId(Long id) {
+        List<Reservation> reservations = reservationRepository.findByClientId(id);
+        List<ReservationDto> reservationDtos = new ArrayList<>();
+        for (Reservation reservation : reservations) {
+            reservationDtos.add(reservationToReservationDto(reservation));
+        }
+        return reservationDtos;
     }
 
     public void deleteReservation(Long id) {
         reservationRepository.deleteById(id);
+    }
+
+    private ReservationDto reservationToReservationDto(Reservation reservation) {
+        ShortProductDto reservationProduct = new ShortProductDto(
+                reservation.getProduct().getId(),
+                reservation.getProduct().getTitle(),
+                reservation.getProduct().getCategory().getTitle(),
+                reservation.getProduct().getImages(),
+                reservation.getProduct().getCharacteristics()
+        );
+
+        return new ReservationDto(
+                reservation.getId(),
+                reservation.getInitialDate(),
+                reservation.getFinalDate(),
+                reservation.getCode(),
+                reservationProduct,
+                reservation.getClient().getId()
+        );
     }
 }

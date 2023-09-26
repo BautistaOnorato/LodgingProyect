@@ -1,5 +1,6 @@
 package com.booking.bookingApp.controller;
 
+import com.booking.bookingApp.dto.UserDto;
 import com.booking.bookingApp.entity.User;
 import com.booking.bookingApp.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.findUserById(id));
     }
 

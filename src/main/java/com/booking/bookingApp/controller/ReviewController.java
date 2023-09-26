@@ -1,5 +1,6 @@
 package com.booking.bookingApp.controller;
 
+import com.booking.bookingApp.dto.ReviewDto;
 import com.booking.bookingApp.entity.Review;
 import com.booking.bookingApp.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +22,12 @@ public class ReviewController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Review> getReviewById(@PathVariable Long id) {
+    public ResponseEntity<ReviewDto> getReviewById(@PathVariable Long id) {
         return ResponseEntity.ok(reviewService.findReviewById(id));
     }
 
     @GetMapping("/product/{id}")
-    public ResponseEntity<List<Review>> getReviewsByProduct(@PathVariable Long id) {
+    public ResponseEntity<List<ReviewDto>> getReviewsByProduct(@PathVariable Long id) {
         return ResponseEntity.ok(reviewService.findReviewsByProductId(id));
     }
 

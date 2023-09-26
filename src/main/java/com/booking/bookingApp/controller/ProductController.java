@@ -1,5 +1,6 @@
 package com.booking.bookingApp.controller;
 
+import com.booking.bookingApp.dto.ProductDto;
 import com.booking.bookingApp.entity.Product;
 import com.booking.bookingApp.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +17,12 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<Product>> getProducts() {
+    public ResponseEntity<List<ProductDto>> getProducts() {
         return ResponseEntity.ok(productService.findAllProducts());
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.findProductById(id));
     }
 

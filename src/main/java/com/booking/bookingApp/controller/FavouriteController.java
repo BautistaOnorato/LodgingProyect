@@ -1,5 +1,6 @@
 package com.booking.bookingApp.controller;
 
+import com.booking.bookingApp.dto.FavouriteDto;
 import com.booking.bookingApp.entity.Favourite;
 import com.booking.bookingApp.service.FavouriteService;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +22,15 @@ public class FavouriteController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Favourite> getFavouriteById(@PathVariable Long id) {
+    public ResponseEntity<FavouriteDto> getFavouriteById(@PathVariable Long id) {
         return ResponseEntity.ok(favouriteService.findFavouriteById(id));
     }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<FavouriteDto>> getFavouriteByUserId(@PathVariable Long id) {
+        return ResponseEntity.ok(favouriteService.findByUserId(id));
+    }
+
 
     @PostMapping
     public ResponseEntity<Favourite> postFavourite(@RequestBody Favourite favourite) {

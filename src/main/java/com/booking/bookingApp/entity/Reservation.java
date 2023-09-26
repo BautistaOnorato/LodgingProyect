@@ -1,5 +1,7 @@
 package com.booking.bookingApp.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,8 +21,10 @@ public class Reservation {
     private Long id;
 
     @Column
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate initialDate;
     @Column
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate finalDate;
     @Column
     private String code;
@@ -31,5 +35,6 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
+    @JsonIdentityReference(alwaysAsId = true)
     private User client;
 }
