@@ -1,5 +1,6 @@
 package com.booking.bookingApp.dto;
 
+import com.booking.bookingApp.entity.Role;
 import jakarta.persistence.Column;
 import lombok.*;
 
@@ -19,6 +20,8 @@ public class UserDto {
     private String email;
     private String password;
     private String phone;
+    private Role role;
+    private String imageUrl;
     private Set<UserFavourite> favouriteProducts = new HashSet<>();
 
     @Getter

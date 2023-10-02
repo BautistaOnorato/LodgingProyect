@@ -6,12 +6,12 @@ import com.booking.bookingApp.entity.User;
 import com.booking.bookingApp.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -32,7 +32,20 @@ public class UserService {
     public UserDto findUserById(Long id) {
         Optional<User> response = userRepository.findById(id);
         if (response.isPresent()) {
-            return userToUserDto(response.get());
+            UserDto user = userToUserDto(response.get());
+            SecurityContext context = SecurityContextHolder.getContext();
+            Authentication authentication = context.getAuthentication();
+            String username = authentication.getName();
+            if (Objects.equals(user.getEmail(), username)) {
+                return user;
+            } else return null;
+        } else return null;
+    }
+
+    public User findUserByEmail(String email) {
+        Optional<User> response = userRepository.findByEmail(email);
+        if (response.isPresent()) {
+            return response.get();
         } else return null;
     }
 
@@ -57,6 +70,8 @@ public class UserService {
                 user.getEmail(),
                 user.getPassword(),
                 user.getPhone(),
+                user.getRole(),
+                user.getImageUrl(),
                 userFavourites
         );
     }

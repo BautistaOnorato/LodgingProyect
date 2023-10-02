@@ -52,6 +52,7 @@ public class ProductService {
     }
 
     public ProductDto findProductById(Long id) {
+        System.out.println("service");
         Optional<Product> response = productRepository.findById(id);
         if (response.isPresent()) {
             Product product = response.get();
