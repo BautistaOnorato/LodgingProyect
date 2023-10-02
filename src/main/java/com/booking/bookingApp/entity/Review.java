@@ -27,7 +27,7 @@ public class Review {
     @Column
     private LocalDate createdAt;
     @Column
-    private Integer stars;
+    private Double stars;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

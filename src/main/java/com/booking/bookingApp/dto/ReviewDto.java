@@ -13,7 +13,7 @@ public class ReviewDto {
     private Long id;
     private String description;
     private LocalDate createdAt;
-    private Integer stars;
+    private Double stars;
     private Long productId;
     private ReviewUser user;
 

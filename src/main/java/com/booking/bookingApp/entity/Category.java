@@ -27,7 +27,7 @@ public class Category {
     @Column
     private String imageUrl;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST)
     @JsonIgnore
     private Set<Product> products = new HashSet<>();
 }

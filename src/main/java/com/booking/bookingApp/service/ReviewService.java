@@ -1,10 +1,13 @@
 package com.booking.bookingApp.service;
 import com.booking.bookingApp.dto.ReviewDto;
+import com.booking.bookingApp.entity.Favourite;
 import com.booking.bookingApp.entity.Review;
 import com.booking.bookingApp.repository.ReviewRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +18,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
 
     public Review saveReview(Review review) {
+        review.setCreatedAt(LocalDate.now());
         return reviewRepository.save(review);
     }
 
@@ -47,6 +51,11 @@ public class ReviewService {
     public void deleteReview(Long id) {
         reviewRepository.deleteById(id);
     }
+
+//    @Transactional
+//    public void deleteList(Iterable<Review> reviews) {
+//        reviewRepository.deleteAll(reviews);
+//    }
 
     private ReviewDto reviewToReviewDto(Review review) {
         ReviewDto.ReviewUser user = new ReviewDto.ReviewUser(review.getUser().getId(), review.getUser().getFirstName(), review.getUser().getLastName());

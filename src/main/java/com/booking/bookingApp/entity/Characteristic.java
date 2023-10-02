@@ -27,7 +27,7 @@ public class Characteristic {
     @Column
     private String icon;
 
-    @ManyToMany(mappedBy = "characteristics", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "characteristics", cascade = CascadeType.PERSIST)
     @JsonIgnore
     private Set<Product> products = new HashSet<>();
 }

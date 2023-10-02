@@ -34,6 +34,8 @@ public class User {
     private String password;
     @Column
     private String phone;
+    @Column
+    private Boolean active;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Favourite> favourites = new HashSet<>();

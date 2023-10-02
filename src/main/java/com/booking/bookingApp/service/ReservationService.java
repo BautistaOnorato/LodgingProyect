@@ -7,10 +7,7 @@ import com.booking.bookingApp.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -18,6 +15,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
 
     public Reservation saveReservation(Reservation reservation) {
+        reservation.setCode(UUID.randomUUID().toString());
         return reservationRepository.save(reservation);
     }
 

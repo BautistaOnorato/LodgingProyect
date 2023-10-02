@@ -31,7 +31,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.saveProduct(product));
     }
 
-    @PutMapping
+    @PatchMapping
     public ResponseEntity<Product> putProduct(@RequestBody Product product) {
         return ResponseEntity.ok(productService.updateProduct(product));
     }

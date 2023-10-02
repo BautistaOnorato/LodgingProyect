@@ -4,6 +4,7 @@ import com.booking.bookingApp.dto.FavouriteDto;
 import com.booking.bookingApp.dto.ShortProductDto;
 import com.booking.bookingApp.entity.Favourite;
 import com.booking.bookingApp.repository.FavouriteRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,11 @@ public class FavouriteService {
     public void deleteFavourite(Long id) {
         favouriteRepository.deleteById(id);
     }
+
+//    @Transactional
+//    public void deleteList(Iterable<Favourite> favourites) {
+//        favouriteRepository.deleteAll(favourites);
+//    }
 
     private FavouriteDto favouriteToFavouriteDto(Favourite favourite) {
         ShortProductDto favouriteProduct = new ShortProductDto(

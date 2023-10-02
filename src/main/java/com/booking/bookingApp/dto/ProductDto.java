@@ -1,6 +1,7 @@
 package com.booking.bookingApp.dto;
 
 import com.booking.bookingApp.entity.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -34,7 +35,9 @@ public class ProductDto {
     @Builder
     public static class ProductReservationDto {
         private Long id;
+        @JsonFormat(pattern = "dd/MM/yyyy")
         private LocalDate initialDate;
+        @JsonFormat(pattern = "dd/MM/yyyy")
         private LocalDate finalDate;
     }
 }

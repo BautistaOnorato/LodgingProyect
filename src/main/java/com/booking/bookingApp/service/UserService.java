@@ -4,6 +4,7 @@ import com.booking.bookingApp.dto.UserDto;
 import com.booking.bookingApp.entity.Favourite;
 import com.booking.bookingApp.entity.User;
 import com.booking.bookingApp.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User saveUser(User user) {
+        user.setActive(true);
         return userRepository.save(user);
     }
 
@@ -38,8 +40,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    @Transactional
     public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        userRepository.updateActive(false, id);
     }
 
     private UserDto userToUserDto(User user) {

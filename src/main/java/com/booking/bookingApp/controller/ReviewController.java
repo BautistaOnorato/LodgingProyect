@@ -1,6 +1,7 @@
 package com.booking.bookingApp.controller;
 
 import com.booking.bookingApp.dto.ReviewDto;
+import com.booking.bookingApp.entity.Reservation;
 import com.booking.bookingApp.entity.Review;
 import com.booking.bookingApp.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,11 @@ public class ReviewController {
     @PostMapping
     public ResponseEntity<Review> postReview(@RequestBody Review review) {
         return ResponseEntity.ok(reviewService.saveReview(review));
+    }
+
+    @PutMapping
+    public ResponseEntity<Review> putReview(@RequestBody Review review) {
+        return ResponseEntity.ok(reviewService.updateReview(review));
     }
 
     @DeleteMapping("/id/{id}")

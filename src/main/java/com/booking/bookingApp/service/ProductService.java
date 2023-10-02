@@ -4,6 +4,7 @@ import com.booking.bookingApp.dto.FavouriteDto;
 import com.booking.bookingApp.dto.ProductDto;
 import com.booking.bookingApp.entity.*;
 import com.booking.bookingApp.repository.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,12 +35,18 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    @Transactional
     public Product updateProduct(Product product) {
-        if (productRepository.findById(product.getId()).isPresent()) {
+        Optional<Product> oldProduct = productRepository.findById(product.getId());
+        if (oldProduct.isPresent()) {
             imageService.saveImages(product.getImages(), product);
+            imageService.removeImages(oldProduct.get().getImages(), product.getImages());
             socialNetworkService.saveSocialNetworks(product.getSocialNetworks(), product);
+            socialNetworkService.removeSocialNetworks(oldProduct.get().getSocialNetworks(), product.getSocialNetworks());
             ruleService.saveRules(product.getRules(), product);
+            ruleService.removeRules(oldProduct.get().getRules(), product.getRules());
             securityService.saveSecurities(product.getSecurities(), product);
+            securityService.removeSecurities(oldProduct.get().getSecurities(), product.getSecurities());
             return productRepository.save(product);
         } else return null;
     }
