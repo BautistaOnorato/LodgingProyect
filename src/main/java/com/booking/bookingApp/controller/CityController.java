@@ -5,6 +5,7 @@ import com.booking.bookingApp.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,16 +26,19 @@ public class CityController {
         return ResponseEntity.ok(cityService.findCityById(id));
     }
 
+    @PreAuthorize("hasAuthority('admin:create')")
     @PostMapping
     public ResponseEntity<City> postCity(@RequestBody City city) {
         return ResponseEntity.ok(cityService.saveCity(city));
     }
 
+    @PreAuthorize("hasAuthority('admin:update')")
     @PutMapping
     public ResponseEntity<City> putCity(@RequestBody City city) {
         return ResponseEntity.ok(cityService.updateCity(city));
     }
 
+    @PreAuthorize("hasAuthority('admin:delete')")
     @DeleteMapping("/id/{id}")
     public ResponseEntity<String> deleteCity(@PathVariable Long id) {
         cityService.deleteCity(id);

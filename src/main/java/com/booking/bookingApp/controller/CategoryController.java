@@ -5,6 +5,7 @@ import com.booking.bookingApp.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,16 +26,19 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.findCategoryById(id));
     }
 
+    @PreAuthorize("hasAuthority('admin:create')")
     @PostMapping
     public ResponseEntity<Category> postCategory(@RequestBody Category category) {
         return ResponseEntity.ok(categoryService.saveCategory(category));
     }
 
+    @PreAuthorize("hasAuthority('admin:update')")
     @PutMapping
     public ResponseEntity<Category> putCategory(@RequestBody Category category) {
         return ResponseEntity.ok(categoryService.updateCategory(category));
     }
 
+    @PreAuthorize("hasAuthority('admin:delete')")
     @DeleteMapping("/id/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);

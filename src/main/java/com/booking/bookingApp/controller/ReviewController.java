@@ -7,6 +7,7 @@ import com.booking.bookingApp.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,18 +33,21 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.findReviewsByProductId(id));
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping
     public ResponseEntity<Review> postReview(@RequestBody Review review) {
         return ResponseEntity.ok(reviewService.saveReview(review));
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PutMapping
     public ResponseEntity<Review> putReview(@RequestBody Review review) {
         return ResponseEntity.ok(reviewService.updateReview(review));
     }
 
+    @PreAuthorize("hasRole('USER') or hasAuthority('admin:delete')")
     @DeleteMapping("/id/{id}")
-    public ResponseEntity<String> deleteReview(@PathVariable Long id) {
+    public ResponseEntity<String> deleteReview(@PathVariable Long id) throws Exception {
         reviewService.deleteReview(id);
         return ResponseEntity.status(HttpStatus.OK).body("Review with id: " + id + " has been deleted.");
     }

@@ -69,25 +69,4 @@ public class Product {
         inverseJoinColumns = { @JoinColumn(name = "characteristic_id") }
     )
     private Set<Characteristic> characteristics = new HashSet<>();
-
-//    public void removeImage(Image image) {
-//        this.images.remove(image);
-//        image.setProduct(null);
-//    }
-//
-//    public void removeSecurity(Security security) {
-//        this.securities.remove(security);
-//        security.setProduct(null);
-//    }
-//
-//    public void removeRule(Rule rule) {
-//        this.rules.remove(rule);
-//        rule.setProduct(null);
-//    }
-//
-//    public void removeSocialNetwork(SocialNetwork socialNetwork) {
-//        this.socialNetworks.remove(socialNetwork);
-//        socialNetwork.setProduct(null);
-//    }
-
 }

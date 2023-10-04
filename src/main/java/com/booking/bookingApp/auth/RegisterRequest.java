@@ -1,5 +1,6 @@
 package com.booking.bookingApp.auth;
 
+import com.booking.bookingApp.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +16,5 @@ public class RegisterRequest {
     private String email;
     private String password;
     private String phone;
+    private Role role;
 }

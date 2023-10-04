@@ -1,7 +1,9 @@
 package com.booking.bookingApp.service;
 
+import com.booking.bookingApp.config.JwtService;
 import com.booking.bookingApp.dto.UserDto;
 import com.booking.bookingApp.entity.Favourite;
+import com.booking.bookingApp.entity.Role;
 import com.booking.bookingApp.entity.User;
 import com.booking.bookingApp.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -9,23 +11,34 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.*;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
 
     public User saveUser(User user) {
-        user.setActive(true);
+        user.setRole(Role.USER);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     public User updateUser(User user) {
-        if (userRepository.findById(user.getId()).isPresent()) {
-            return userRepository.save(user);
+        Optional<User> response = userRepository.findById(user.getId());
+        if (response.isPresent()) {
+            List<String> roles = jwtService.getRolesFromJwt();
+            String username = jwtService.getUsername();
+            if (roles.contains("ROLE_ADMIN") || username.equals(response.get().getEmail())) {
+                user.setPassword(response.get().getPassword());
+                return userRepository.save(user);
+            } else return null;
         } else return null;
     }
 
@@ -33,10 +46,9 @@ public class UserService {
         Optional<User> response = userRepository.findById(id);
         if (response.isPresent()) {
             UserDto user = userToUserDto(response.get());
-            SecurityContext context = SecurityContextHolder.getContext();
-            Authentication authentication = context.getAuthentication();
-            String username = authentication.getName();
-            if (Objects.equals(user.getEmail(), username)) {
+            List<String> roles = jwtService.getRolesFromJwt();
+            String username = jwtService.getUsername();
+            if (roles.contains("ROLE_ADMIN") || username.equals(user.getEmail())) {
                 return user;
             } else return null;
         } else return null;
@@ -45,7 +57,12 @@ public class UserService {
     public User findUserByEmail(String email) {
         Optional<User> response = userRepository.findByEmail(email);
         if (response.isPresent()) {
-            return response.get();
+            User user = response.get();
+            List<String> roles = jwtService.getRolesFromJwt();
+            String username = jwtService.getUsername();
+            if (roles.contains("ROLE_ADMIN") || username.equals(user.getEmail())) {
+                return user;
+            } else return null;
         } else return null;
     }
 
@@ -54,8 +71,20 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUser(Long id) {
-        userRepository.updateActive(false, id);
+    public void deleteUser(Long id) throws Exception {
+        Optional<User> response = userRepository.findById(id);
+        if (response.isPresent()) {
+            User user = response.get();
+            List<String> roles = jwtService.getRolesFromJwt();
+            String username = jwtService.getUsername();
+            System.out.println(roles.contains("ROLE_ADMIN"));
+            System.out.println(username);
+            if (roles.contains("ROLE_ADMIN") || username.equals(user.getEmail())) {
+                userRepository.deleteById(id);
+            } else {
+                throw new Exception("No se pudo eliminar el usuario");
+            }
+        }
     }
 
     private UserDto userToUserDto(User user) {

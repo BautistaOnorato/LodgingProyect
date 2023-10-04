@@ -5,6 +5,7 @@ import com.booking.bookingApp.service.CharacteristicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,16 +26,19 @@ public class CharacteristicController {
         return ResponseEntity.ok(characteristicService.findCharacteristicById(id));
     }
 
+    @PreAuthorize("hasAuthority('admin:create')")
     @PostMapping
     public ResponseEntity<Characteristic> postCharacteristic(@RequestBody Characteristic characteristic) {
         return ResponseEntity.ok(characteristicService.saveCharacteristic(characteristic));
     }
 
+    @PreAuthorize("hasAuthority('admin:update')")
     @PutMapping
     public ResponseEntity<Characteristic> putCharacteristic(@RequestBody Characteristic characteristic) {
         return ResponseEntity.ok(characteristicService.updateCharacteristic(characteristic));
     }
 
+    @PreAuthorize("hasAuthority('admin:delete')")
     @DeleteMapping("/id/{id}")
     public ResponseEntity<String> deleteCharacteristic(@PathVariable Long id) {
         characteristicService.deleteCharacteristic(id);
