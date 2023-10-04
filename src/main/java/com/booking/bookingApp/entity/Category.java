@@ -20,11 +20,11 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column(nullable = false)
     private String title;
     @Column
     private String description;
-    @Column
+    @Column(nullable = false)
     private String imageUrl;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST)

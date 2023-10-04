@@ -1,6 +1,8 @@
 package com.booking.bookingApp.controller;
 
 import com.booking.bookingApp.entity.Category;
+import com.booking.bookingApp.exception.BadRequestException;
+import com.booking.bookingApp.exception.ResourceNotFoundException;
 import com.booking.bookingApp.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,25 +24,25 @@ public class CategoryController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable Long id) {
+    public ResponseEntity<Category> getCategoryById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(categoryService.findCategoryById(id));
     }
 
     @PreAuthorize("hasAuthority('admin:create')")
     @PostMapping
-    public ResponseEntity<Category> postCategory(@RequestBody Category category) {
+    public ResponseEntity<Category> postCategory(@RequestBody Category category) throws BadRequestException {
         return ResponseEntity.ok(categoryService.saveCategory(category));
     }
 
     @PreAuthorize("hasAuthority('admin:update')")
     @PutMapping
-    public ResponseEntity<Category> putCategory(@RequestBody Category category) {
+    public ResponseEntity<Category> putCategory(@RequestBody Category category) throws ResourceNotFoundException {
         return ResponseEntity.ok(categoryService.updateCategory(category));
     }
 
     @PreAuthorize("hasAuthority('admin:delete')")
     @DeleteMapping("/id/{id}")
-    public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
+    public ResponseEntity<String> deleteCategory(@PathVariable Long id) throws ResourceNotFoundException {
         categoryService.deleteCategory(id);
         return ResponseEntity.status(HttpStatus.OK).body("Category with id: " + id + " has been deleted.");
     }

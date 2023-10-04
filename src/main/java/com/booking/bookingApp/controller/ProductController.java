@@ -2,6 +2,8 @@ package com.booking.bookingApp.controller;
 
 import com.booking.bookingApp.dto.ProductDto;
 import com.booking.bookingApp.entity.Product;
+import com.booking.bookingApp.exception.BadRequestException;
+import com.booking.bookingApp.exception.ResourceNotFoundException;
 import com.booking.bookingApp.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,25 +25,25 @@ public class ProductController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(productService.findProductById(id));
     }
 
     @PreAuthorize("hasAuthority('admin:create')")
     @PostMapping
-    public ResponseEntity<Product> postProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> postProduct(@RequestBody Product product) throws BadRequestException {
         return ResponseEntity.ok(productService.saveProduct(product));
     }
 
     @PreAuthorize("hasAuthority('admin:update')")
     @PatchMapping
-    public ResponseEntity<Product> putProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> putProduct(@RequestBody Product product) throws ResourceNotFoundException {
         return ResponseEntity.ok(productService.updateProduct(product));
     }
 
     @PreAuthorize("hasAuthority('admin:delete')")
     @DeleteMapping("/id/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) throws ResourceNotFoundException {
         productService.deleteProduct(id);
         return ResponseEntity.status(HttpStatus.OK).body("Product with id " + id + " has been deleted.");
     }

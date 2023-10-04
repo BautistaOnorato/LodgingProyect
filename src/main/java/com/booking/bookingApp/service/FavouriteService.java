@@ -3,7 +3,11 @@ package com.booking.bookingApp.service;
 import com.booking.bookingApp.dto.FavouriteDto;
 import com.booking.bookingApp.dto.ShortProductDto;
 import com.booking.bookingApp.entity.Favourite;
+import com.booking.bookingApp.entity.User;
+import com.booking.bookingApp.exception.BadRequestException;
+import com.booking.bookingApp.exception.ResourceNotFoundException;
 import com.booking.bookingApp.repository.FavouriteRepository;
+import com.booking.bookingApp.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,38 +20,45 @@ import java.util.Optional;
 @Service
 public class FavouriteService {
     private final FavouriteRepository favouriteRepository;
+    private final UserRepository userRepository;
 
-    public Favourite saveFavourite(Favourite favourite) {
-        return favouriteRepository.save(favourite);
+    public Favourite saveFavourite(Favourite favourite) throws BadRequestException {
+        try {
+            return favouriteRepository.save(favourite);
+        } catch (Exception e) {
+            throw new BadRequestException("Something went wrong. The favourite was not created.");
+        }
     }
 
-    public FavouriteDto findFavouriteById(Long id) {
+    public FavouriteDto findFavouriteById(Long id) throws ResourceNotFoundException {
         Optional<Favourite> response = favouriteRepository.findById(id);
         if (response.isPresent()) {
             return favouriteToFavouriteDto(response.get());
-        } else return null;
+        } else throw new ResourceNotFoundException("Something went wrong. The favourite with id: " + id + " does not exist.");
     }
 
     public List<Favourite> findAllFavourites() {
         return favouriteRepository.findAll();
     }
-    public List<FavouriteDto> findByUserId(Long id) {
-        List<Favourite> favourites = favouriteRepository.findByUserId(id);
-        List<FavouriteDto> favouriteDtos = new ArrayList<>();
-        for (Favourite favourite : favourites) {
-            favouriteDtos.add(favouriteToFavouriteDto(favourite));
-        }
-        return favouriteDtos;
+    public List<FavouriteDto> findByUserId(Long id) throws ResourceNotFoundException {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            List<Favourite> favourites = favouriteRepository.findByUserId(id);
+            List<FavouriteDto> favouriteDtos = new ArrayList<>();
+            for (Favourite favourite : favourites) {
+                favouriteDtos.add(favouriteToFavouriteDto(favourite));
+            }
+            return favouriteDtos;
+        } else throw new ResourceNotFoundException("Something went wrong. The user with id: " + id + " does not exist.");
     }
 
-    public void deleteFavourite(Long id) {
-        favouriteRepository.deleteById(id);
+    public void deleteFavourite(Long id) throws ResourceNotFoundException {
+        Optional<Favourite> favourite = favouriteRepository.findById(id);
+        if (favourite.isPresent()) {
+            favouriteRepository.deleteById(id);
+        } else throw new ResourceNotFoundException("Something went wrong. The favourite with id: " + id + " does not exist.");
     }
 
-//    @Transactional
-//    public void deleteList(Iterable<Favourite> favourites) {
-//        favouriteRepository.deleteAll(favourites);
-//    }
 
     private FavouriteDto favouriteToFavouriteDto(Favourite favourite) {
         ShortProductDto favouriteProduct = new ShortProductDto(

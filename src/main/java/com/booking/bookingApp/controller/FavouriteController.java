@@ -2,6 +2,8 @@ package com.booking.bookingApp.controller;
 
 import com.booking.bookingApp.dto.FavouriteDto;
 import com.booking.bookingApp.entity.Favourite;
+import com.booking.bookingApp.exception.BadRequestException;
+import com.booking.bookingApp.exception.ResourceNotFoundException;
 import com.booking.bookingApp.service.FavouriteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,25 +27,25 @@ public class FavouriteController {
 
     @PreAuthorize("hasAuthority('admin:read')")
     @GetMapping("/id/{id}")
-    public ResponseEntity<FavouriteDto> getFavouriteById(@PathVariable Long id) {
+    public ResponseEntity<FavouriteDto> getFavouriteById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(favouriteService.findFavouriteById(id));
     }
 
     @PreAuthorize("hasAuthority('admin:read') or hasRole('USER')")
     @GetMapping("/user/{id}")
-    public ResponseEntity<List<FavouriteDto>> getFavouriteByUserId(@PathVariable Long id) {
+    public ResponseEntity<List<FavouriteDto>> getFavouriteByUserId(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(favouriteService.findByUserId(id));
     }
 
     @PreAuthorize("hasAuthority('admin:create') or hasRole('USER')")
     @PostMapping
-    public ResponseEntity<Favourite> postFavourite(@RequestBody Favourite favourite) {
+    public ResponseEntity<Favourite> postFavourite(@RequestBody Favourite favourite) throws BadRequestException {
         return ResponseEntity.ok(favouriteService.saveFavourite(favourite));
     }
 
     @PreAuthorize("hasAuthority('admin:delete') or hasRole('USER')")
     @DeleteMapping("/id/{id}")
-    public ResponseEntity<String> deleteFavourite(@PathVariable Long id) {
+    public ResponseEntity<String> deleteFavourite(@PathVariable Long id) throws ResourceNotFoundException {
         favouriteService.deleteFavourite(id);
         return ResponseEntity.status(HttpStatus.OK).body("Favourite with id: " + id + " has been deleted.");
     }
