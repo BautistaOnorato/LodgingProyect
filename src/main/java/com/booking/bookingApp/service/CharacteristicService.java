@@ -15,6 +15,10 @@ import java.util.Optional;
 public class CharacteristicService {
     private final CharacteristicRepository characteristicRepository;
 
+    public List<Characteristic> saveAll(List<Characteristic> characteristics) {
+        return characteristicRepository.saveAll(characteristics);
+    }
+
     public Characteristic saveCharacteristic(Characteristic characteristic) throws BadRequestException {
         try {
             return characteristicRepository.save(characteristic);

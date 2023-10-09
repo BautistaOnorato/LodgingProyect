@@ -17,15 +17,16 @@ public class SocialNetwork {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String title;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private SocialNetworkEnum title;
     @Column
     private String icon;
-    @Column
+    @Column(nullable = false)
     private String url;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = false)
     @JsonIgnore
     private Product product;
 }

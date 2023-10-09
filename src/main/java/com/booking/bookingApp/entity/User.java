@@ -25,23 +25,23 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String firstName;
-    @Column
+    @Column(nullable = false)
     private String lastName;
-    @Column
+    @Column(nullable = false)
     private String email;
-    @Column
+    @Column(nullable = false)
     private String password;
     @Column
     private String phone;
     @Column
     private String imageUrl;
     @Column
-    private Boolean active = true;
-    @Column
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Column
+    private Boolean enable = true;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Favourite> favourites = new HashSet<>();
@@ -79,6 +79,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.enable;
     }
 }

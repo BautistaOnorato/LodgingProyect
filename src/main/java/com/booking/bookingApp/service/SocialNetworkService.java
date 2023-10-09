@@ -2,6 +2,7 @@ package com.booking.bookingApp.service;
 
 import com.booking.bookingApp.entity.SocialNetwork;
 import com.booking.bookingApp.entity.Product;
+import com.booking.bookingApp.entity.SocialNetworkEnum;
 import com.booking.bookingApp.repository.SocialNetworkRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -36,8 +37,14 @@ public class SocialNetworkService {
         if (socialNetworks != null) {
             for (SocialNetwork socialNetwork : socialNetworks) {
                 socialNetwork.setProduct(product);
+                if (socialNetwork.getTitle().equals(SocialNetworkEnum.X)) {
+                    socialNetwork.setIcon("https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/brand-x.svg");
+                } else if (socialNetwork.getTitle().equals(SocialNetworkEnum.FACEBOOK)) {
+                    socialNetwork.setIcon("https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/facebook.svg");
+                } else socialNetwork.setIcon("https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/brand-instagram.svg");
                 socialNetworkRepository.save(socialNetwork);
             }
         }
     }
+
 }

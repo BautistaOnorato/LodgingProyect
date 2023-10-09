@@ -34,6 +34,11 @@ public class CharacteristicController {
         return ResponseEntity.ok(characteristicService.saveCharacteristic(characteristic));
     }
 
+    @PostMapping("/all")
+    public ResponseEntity<List<Characteristic>> postAllCharacteristic(@RequestBody List<Characteristic> characteristic) {
+        return ResponseEntity.ok(characteristicService.saveAll(characteristic));
+    }
+
     @PreAuthorize("hasAuthority('admin:update')")
     @PutMapping
     public ResponseEntity<Characteristic> putCharacteristic(@RequestBody Characteristic characteristic) throws ResourceNotFoundException {

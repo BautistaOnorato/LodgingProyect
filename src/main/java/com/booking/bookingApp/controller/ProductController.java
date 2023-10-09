@@ -1,6 +1,7 @@
 package com.booking.bookingApp.controller;
 
 import com.booking.bookingApp.dto.ProductDto;
+import com.booking.bookingApp.dto.ShortProductDto;
 import com.booking.bookingApp.entity.Product;
 import com.booking.bookingApp.exception.BadRequestException;
 import com.booking.bookingApp.exception.ResourceNotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -46,5 +48,15 @@ public class ProductController {
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) throws ResourceNotFoundException {
         productService.deleteProduct(id);
         return ResponseEntity.status(HttpStatus.OK).body("Product with id " + id + " has been deleted.");
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<ShortProductDto>> searchProducts(
+            @RequestParam(name = "category", required = false) String categoryId,
+            @RequestParam(name = "city", required = false) String cityId,
+            @RequestParam(name = "initial_date", required = false) String initialDate,
+            @RequestParam(name = "final_date", required = false) String finalDate
+    ) {
+        return ResponseEntity.ok(productService.findProductByFilter(categoryId, cityId, initialDate, finalDate));
     }
 }

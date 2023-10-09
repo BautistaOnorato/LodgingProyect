@@ -20,11 +20,11 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String country;
-    @Column
+    @Column(nullable = false)
     private String state;
-    @Column
+    @Column(nullable = false)
     private String city;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.PERSIST)

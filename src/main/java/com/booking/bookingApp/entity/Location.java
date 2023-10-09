@@ -18,18 +18,18 @@ public class Location {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "city_id")
+    @JoinColumn(name = "city_id", nullable = false)
     private City city;
 
-    @Column
+    @Column(nullable = false)
     private String street;
     @Column
     private String streetNumber;
     @Column
     private String floor;
-    @Column
+    @Column(nullable = false)
     private Double latitude;
-    @Column
+    @Column(nullable = false)
     private Double longitude;
 
     @OneToOne(mappedBy = "location")

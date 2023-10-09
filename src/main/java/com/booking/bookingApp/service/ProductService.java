@@ -2,14 +2,17 @@ package com.booking.bookingApp.service;
 
 import com.booking.bookingApp.dto.FavouriteDto;
 import com.booking.bookingApp.dto.ProductDto;
+import com.booking.bookingApp.dto.ShortProductDto;
 import com.booking.bookingApp.entity.*;
 import com.booking.bookingApp.exception.BadRequestException;
 import com.booking.bookingApp.exception.ResourceNotFoundException;
 import com.booking.bookingApp.repository.*;
+import com.booking.bookingApp.utils.Util;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @RequiredArgsConstructor
@@ -32,11 +35,17 @@ public class ProductService {
             for (Rule rule : product.getRules()) {
                 rule.setProduct(product);
             }
-            for (SocialNetwork socialNetworks : product.getSocialNetworks()) {
-                socialNetworks.setProduct(product);
+            for (SocialNetwork socialNetwork : product.getSocialNetworks()) {
+                socialNetwork.setProduct(product);
+                if (socialNetwork.getTitle().equals(SocialNetworkEnum.X)) {
+                    socialNetwork.setIcon("https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/brand-x.svg");
+                } else if (socialNetwork.getTitle().equals(SocialNetworkEnum.FACEBOOK)) {
+                    socialNetwork.setIcon("https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/facebook.svg");
+                } else socialNetwork.setIcon("https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/brand-instagram.svg");
             }
             return productRepository.save(product);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new BadRequestException("Something went wrong. The product was not created.");
         }
     }
@@ -74,6 +83,25 @@ public class ProductService {
         return productDtos;
     }
 
+    public List<ShortProductDto> findProductByFilter(String categoryId, String cityId, String initialDate, String finalDate) {
+        List<ShortProductDto> response = new ArrayList<>();
+        System.out.println(cityId);
+        System.out.println(categoryId);
+        System.out.println(initialDate);
+        System.out.println(finalDate);
+        if (cityId != null || categoryId != null || (initialDate != null && finalDate != null)) {
+            for (Product product : productRepository.filterProducts(Util.nullToString(cityId), Util.nullToString(categoryId), Util.nullToString(initialDate), Util.nullToString(finalDate))) {
+                response.add(productToShortProductDto(product));
+            }
+        } else {
+            System.out.println(2);
+            for (Product product : productRepository.findXRandomProducts(12)) {
+                response.add(productToShortProductDto(product));
+            }
+        }
+        return response;
+    }
+
     public void deleteProduct(Long id) throws ResourceNotFoundException {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
@@ -103,5 +131,15 @@ public class ProductService {
                         product.getCharacteristics()
                 );
         return productDto;
+    }
+
+    private ShortProductDto productToShortProductDto(Product product) {
+        return new ShortProductDto(
+                product.getId(),
+                product.getTitle(),
+                product.getCategory().getTitle(),
+                product.getImages(),
+                product.getCharacteristics()
+        );
     }
 }

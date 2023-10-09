@@ -1,0 +1,289 @@
+// USERS 
+
+{
+  "email": "admin@gmail.com",
+  "password": "123",
+  "firstName": "Juan",
+  "lastName": "Perez",
+  "phone": "+541128576984",
+  "role": "ADMIN"
+}
+
+{
+  "email": "user@gmail.com",
+  "password": "123",
+  "firstName": "Jose",
+  "lastName": "Perez",
+  "phone": "+541128576984",
+  "role": "USER"
+}
+
+// CATEGORIES
+
+{
+    "title": "Vacation Rental",
+    "description": "Discover the freedom of home-away-from-home living with our vacation rentals",
+    "imageUrl": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Categories/Vacation+Rental.jpg"
+}
+
+{
+    "title": "Hostel",
+    "description": "Discover affordable adventure with our curated hostels.",
+    "imageUrl": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Categories/Hostel.jpg"
+}
+
+{
+    "title": "Bed & Breakfast",
+    "description": "Indulge in quaint charm at our selection of bed & breakfasts",
+    "imageUrl": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Categories/B%26B.jpg"
+}
+
+{
+    "title": "Hotel",
+    "description": "Explore a world of exceptional stays with our handpicked hotels",
+    "imageUrl": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Categories/Hotel.webp"
+}
+
+// CITIES
+
+{
+    "country": "Argentina",
+    "state": "Neuquén",
+    "city": "San Carlos de Bariloche"
+}
+
+// Characteristics
+
+{
+    "title": "Kitchen",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/cooking.svg"
+},
+{
+    "title": "Balcony",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/balcony.svg"
+},
+{
+    "title": "Free WiFi",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/wifi.svg"
+},
+{
+    "title": "Elevator",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/elevator.svg"
+},
+{
+    "title": "BBQ Facilities",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/grill.svg"
+},
+{
+    "title": "Heating",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/heat.svg"
+},
+{
+    "title": "Washing machine",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/wash-machine.svg"
+},
+{
+    "title": "Parking",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/parking.svg"
+},
+{
+    "title": "Breakfast",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/utensils-crossed.svg"
+},
+{
+    "title": "Golf course",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/golf.svg"
+},
+{
+    "title": "Pool table",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/sport-billard.svg"
+},
+{
+    "title": "Tenis court",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/ball-tennis.svg"
+},
+{
+    "title": "Concierge",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/bell.svg"
+},
+{
+    "title": "Spa",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/massage.svg"
+},
+{
+    "title": "Fitness center",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/barbell.svg"
+},
+{
+    "title": "Air-conditioning",
+    "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/air-conditioning.svg"
+}
+
+// Products
+
+{
+    "title": "Llao Llao Resort, Golf-Spa",
+    "description": "Llao Llao Resort, Golf-Spa is the most exclusive resort in Argentine Patagonia. Our 5 star Resort in Bariloche offers Studios and Suites with incredible views of lakes, forests and mountains. A magnificent indoor / outdoor pool, 18 holes of golf, an amazing Spa and activities for adults and children, are some of the services available.",
+    "rating": 5,
+    "cancellationPolicy": "No refund",
+    "location": {
+        "city": {
+            "id": 1
+        },
+        "street": "Av. Ezequiel Bustillo Km. 25",
+        "latitude": -41.05698483252916,
+        "longitude": -71.53132507595566
+    },
+    "category": {
+        "id": 4
+    },
+    "securities": [
+        {
+            "description": "Security cameras"
+        },
+        {
+            "description": "Security staff"
+        }
+    ],
+    "rules": [
+        {
+            "description": "No parties"
+        },
+        {
+            "description": "No pets"
+        },
+        {
+            "description": "The minimum age for check-in is 18"
+        },
+        {
+            "description": "Check-out until 11:30 AM"
+        },
+        {
+            "description": "Check-in from 3:00 PM"
+        }
+    ],
+    "socialNetworks": [
+        {
+            "title": "Facebook",
+            "url": "https://www.facebook.com/llaollaohotel/"
+        },
+        {
+            "title": "Instagram",
+            "url": "http://instagram.com/llaollaohotel"
+        },
+        {
+            "title": "X",
+            "url": "https://twitter.com/LlaoLlaoHotel"
+        }
+    ],
+    "images": [
+        {
+            "url": "image.jpg",
+            "title": "first image"
+        },
+        {
+            "url": "image2.jpg",
+            "title": "second image"
+        }
+    ],
+    "characteristics": [
+        {
+            "id": 1
+        }
+    ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+[
+    {
+        "id": 1,
+        "title": "Kitchen",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/cooking.svg"
+    },
+    {
+        "id": 2,
+        "title": "Balcony",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/balcony.svg"
+    },
+    {
+        "id": 3,
+        "title": "Free WiFi",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/wifi.svg"
+    },
+    {
+        "id": 4,
+        "title": "Elevator",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/elevator.svg"
+    },
+    {
+        "id": 5,
+        "title": "BBQ Facilities",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/grill.svg"
+    },
+    {
+        "id": 6,
+        "title": "Heating",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/heat.svg"
+    },
+    {
+        "id": 7,
+        "title": "Washing machine",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/wash-machine.svg"
+    },
+    {
+        "id": 8,
+        "title": "Parking",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/parking.svg"
+    },
+    {
+        "id": 9,
+        "title": "Breakfast",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/utensils-crossed.svg"
+    },
+    {
+        "id": 10,
+        "title": "Golf course",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/golf.svg"
+    },
+    {
+        "id": 11,
+        "title": "Pool table",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/sport-billard.svg"
+    },
+    {
+        "id": 12,
+        "title": "Tenis court",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/ball-tennis.svg"
+    },
+    {
+        "id": 13,
+        "title": "Concierge",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/bell.svg"
+    },
+    {
+        "id": 14,
+        "title": "Spa",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/massage.svg"
+    },
+    {
+        "id": 15,
+        "title": "Fitness center",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/barbell.svg"
+    },
+    {
+        "id": 16,
+        "title": "Air-conditioning",
+        "icon": "https://booking-app-bautista-onorato.s3.sa-east-1.amazonaws.com/Icons/air-conditioning.svg"
+    }
+]

@@ -92,7 +92,7 @@ public class UserService {
         } else throw new ResourceNotFoundException("Something went wrong. The user with id: " + id + " does not exist.");
     }
 
-    private UserDto userToUserDto(User user) {
+    public UserDto userToUserDto(User user) {
         Set<UserDto.UserFavourite> userFavourites = new HashSet<>();
         for (Favourite favourite : user.getFavourites()) {
             userFavourites.add(new UserDto.UserFavourite(favourite.getProduct().getId()));
@@ -106,6 +106,7 @@ public class UserService {
                 user.getPhone(),
                 user.getRole(),
                 user.getImageUrl(),
+                user.isEnabled(),
                 userFavourites
         );
     }

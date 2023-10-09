@@ -20,11 +20,9 @@ public class Characteristic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String title;
-    @Column
-    private String description;
-    @Column
+    @Column(nullable = false)
     private String icon;
 
     @ManyToMany(mappedBy = "characteristics", cascade = CascadeType.PERSIST)
