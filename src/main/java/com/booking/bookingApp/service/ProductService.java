@@ -137,9 +137,9 @@ public class ProductService {
         return new ShortProductDto(
                 product.getId(),
                 product.getTitle(),
-                product.getCategory().getTitle(),
+                product.getLocation(),
                 product.getImages(),
-                product.getCharacteristics()
+                product.getRating()
         );
     }
 }

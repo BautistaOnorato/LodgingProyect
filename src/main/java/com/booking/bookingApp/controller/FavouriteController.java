@@ -15,6 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/favourites")
 public class FavouriteController {
     private final FavouriteService favouriteService;

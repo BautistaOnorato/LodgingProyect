@@ -15,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/characteristics")
+@CrossOrigin("*")
 public class CharacteristicController {
     private final CharacteristicService characteristicService;
 

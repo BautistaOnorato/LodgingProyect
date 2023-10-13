@@ -75,9 +75,9 @@ public class ReservationService {
         ShortProductDto reservationProduct = new ShortProductDto(
                 reservation.getProduct().getId(),
                 reservation.getProduct().getTitle(),
-                reservation.getProduct().getCategory().getTitle(),
+                reservation.getProduct().getLocation(),
                 reservation.getProduct().getImages(),
-                reservation.getProduct().getCharacteristics()
+                reservation.getProduct().getRating()
         );
 
         return new ReservationDto(

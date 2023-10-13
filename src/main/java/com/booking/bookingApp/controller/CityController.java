@@ -15,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/cities")
+@CrossOrigin("*")
 public class CityController {
     private final CityService cityService;
 

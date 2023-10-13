@@ -64,9 +64,9 @@ public class FavouriteService {
         ShortProductDto favouriteProduct = new ShortProductDto(
                 favourite.getProduct().getId(),
                 favourite.getProduct().getTitle(),
-                favourite.getProduct().getCategory().getTitle(),
+                favourite.getProduct().getLocation(),
                 favourite.getProduct().getImages(),
-                favourite.getProduct().getCharacteristics()
+                favourite.getProduct().getRating()
         );
 
         return new FavouriteDto(

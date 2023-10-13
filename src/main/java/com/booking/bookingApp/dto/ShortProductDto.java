@@ -2,6 +2,7 @@ package com.booking.bookingApp.dto;
 
 import com.booking.bookingApp.entity.Characteristic;
 import com.booking.bookingApp.entity.Image;
+import com.booking.bookingApp.entity.Location;
 import lombok.*;
 
 import java.util.HashSet;
@@ -14,7 +15,7 @@ import java.util.Set;
 public class ShortProductDto {
     private Long id;
     private String title;
-    private String category;
+    private Location location;
     private Set<Image> images = new HashSet<>();
-    private Set<Characteristic> characteristics = new HashSet<>();
+    private Double rating;
 }
