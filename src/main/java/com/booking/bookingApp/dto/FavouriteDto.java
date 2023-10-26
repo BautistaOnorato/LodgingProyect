@@ -11,3 +11,4 @@ public class FavouriteDto {
     private Long userId;
     private ShortProductDto product;
 }
+

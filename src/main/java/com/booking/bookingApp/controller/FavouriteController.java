@@ -1,6 +1,7 @@
 package com.booking.bookingApp.controller;
 
 import com.booking.bookingApp.dto.FavouriteDto;
+import com.booking.bookingApp.dto.UserDto;
 import com.booking.bookingApp.entity.Favourite;
 import com.booking.bookingApp.exception.BadRequestException;
 import com.booking.bookingApp.exception.ResourceNotFoundException;
@@ -40,7 +41,7 @@ public class FavouriteController {
 
     @PreAuthorize("hasAuthority('admin:create') or hasRole('USER')")
     @PostMapping
-    public ResponseEntity<Favourite> postFavourite(@RequestBody Favourite favourite) throws BadRequestException {
+    public ResponseEntity<UserDto.UserFavourite> postFavourite(@RequestBody Favourite favourite) throws BadRequestException {
         return ResponseEntity.ok(favouriteService.saveFavourite(favourite));
     }
 

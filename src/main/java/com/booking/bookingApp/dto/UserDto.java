@@ -30,6 +30,7 @@ public class UserDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class UserFavourite {
+        private Long favouriteId;
         private Long productId;
     }
 }

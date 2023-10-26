@@ -23,10 +23,12 @@ public class ReservationService {
     private final JwtService jwtService;
 
     public Reservation saveReservation(Reservation reservation) throws BadRequestException {
+        System.out.println(1);
         try {
             reservation.setCode(UUID.randomUUID().toString());
             return reservationRepository.save(reservation);
         } catch (Exception e) {
+            System.out.println(e);
             throw new BadRequestException("Something went wrong. The reservation was not created.");
         }
     }

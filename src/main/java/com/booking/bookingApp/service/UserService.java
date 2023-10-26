@@ -95,7 +95,7 @@ public class UserService {
     public UserDto userToUserDto(User user) {
         Set<UserDto.UserFavourite> userFavourites = new HashSet<>();
         for (Favourite favourite : user.getFavourites()) {
-            userFavourites.add(new UserDto.UserFavourite(favourite.getProduct().getId()));
+            userFavourites.add(new UserDto.UserFavourite(favourite.getId(), favourite.getProduct().getId()));
         }
         return new UserDto(
                 user.getId(),

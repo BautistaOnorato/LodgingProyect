@@ -16,16 +16,17 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(
             nativeQuery = true,
             value = """
-                    SELECT p.* FROM product p
+                    SELECT DISTINCT p.* FROM product p
                     LEFT JOIN location l ON l.id = p.location_id
                     LEFT JOIN reservation r ON r.product_id = p.id
                     WHERE l.city_id LIKE CONCAT("%", :cityId, "%") and p.category_id LIKE CONCAT("%", :categoryId, "%")
                     AND NOT EXISTS (
                         SELECT * FROM reservation r WHERE r.product_id = p.id
                         AND (
-                            (r.initial_date >= :initialDate AND r.initial_date < :finalDate)
-                            OR (r.final_date > :initialDate AND r.final_date <= :finalDate)
-                            OR (r.initial_date >= :initialDate AND r.final_date <= :finalDate)
+                            (:initialDate >= r.initial_date AND :finalDate <= r.final_date)
+                            OR (:initialDate >= r.initial_date AND :initialDate <= r.final_date)
+                            OR (:finalDate > r.initial_date AND :finalDate <= r.final_date)
+                            OR (:initialDate < r.initial_date AND :finalDate > r.final_date)
                         )
                     )
                     """

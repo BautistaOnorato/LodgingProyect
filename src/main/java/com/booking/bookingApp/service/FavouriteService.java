@@ -2,6 +2,7 @@ package com.booking.bookingApp.service;
 
 import com.booking.bookingApp.dto.FavouriteDto;
 import com.booking.bookingApp.dto.ShortProductDto;
+import com.booking.bookingApp.dto.UserDto;
 import com.booking.bookingApp.entity.Favourite;
 import com.booking.bookingApp.entity.User;
 import com.booking.bookingApp.exception.BadRequestException;
@@ -22,9 +23,10 @@ public class FavouriteService {
     private final FavouriteRepository favouriteRepository;
     private final UserRepository userRepository;
 
-    public Favourite saveFavourite(Favourite favourite) throws BadRequestException {
+    public UserDto.UserFavourite saveFavourite(Favourite favourite) throws BadRequestException {
         try {
-            return favouriteRepository.save(favourite);
+            favouriteRepository.save(favourite);
+            return new UserDto.UserFavourite(favourite.getId(), favourite.getProduct().getId());
         } catch (Exception e) {
             throw new BadRequestException("Something went wrong. The favourite was not created.");
         }
