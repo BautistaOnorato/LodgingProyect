@@ -27,7 +27,8 @@ public class Product {
     private String title;
     @Column
     private Double rating;
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, length = 2000)
     private String description;
     @Column(nullable = false)
     private String cancellationPolicy;
