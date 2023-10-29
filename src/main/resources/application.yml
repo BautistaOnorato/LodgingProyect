@@ -4,9 +4,9 @@ spring:
   application:
     name: booking-api
   datasource:
-    url: jdbc:mysql://aws.connect.psdb.cloud/ecommerce-admin?sslMode=VERIFY_IDENTITY
-    username: jg4qd9flyyn8obp3dwpo
-    password: pscale_pw_3lQ6jTRD2fYky6Z9RQ2mYJSI9QBYZxC660tbU3anHoe
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   jpa:
     show-sql: true
