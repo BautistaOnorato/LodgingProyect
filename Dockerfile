@@ -1,5 +1,4 @@
-FROM openjdk:20-jdk
-WORKDIR /opt
+FROM amazoncorretto:20-apline-jdk
 EXPOSE 9090
-COPY target/bookingApp-0.0.1-SNAPSHOT.jar  /opt/bookingApp.jar
-ENTRYPOINT exec java $JAVA_OPTS -jar bookingApp.jar
+COPY target/bookingApp-0.0.1-SNAPSHOT.jar  app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]

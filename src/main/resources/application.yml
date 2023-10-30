@@ -4,7 +4,7 @@ spring:
   application:
     name: booking-api
   datasource:
-    url: jdbc:mysql://bjiwgii26ti6lhkxncrd-mysql.services.clever-cloud.com/bjiwgii26ti6lhkxncrd
+    url: jdbc:mysql://bjiwgii26ti6lhkxncrd-mysql.services.clever-cloud.com:3306/bjiwgii26ti6lhkxncrd
     username: u6r9g3vnweca6gen
     password: iJ3aJR98ME771CGOuoEv
 
