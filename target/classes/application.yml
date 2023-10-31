@@ -4,11 +4,11 @@ spring:
   application:
     name: booking-api
   datasource:
-    url: jdbc:mysql://bjiwgii26ti6lhkxncrd-mysql.services.clever-cloud.com:3306/bjiwgii26ti6lhkxncrd
-    username: u6r9g3vnweca6gen
-    password: iJ3aJR98ME771CGOuoEv
+    url: jdbc:mysql://n76.h.filess.io:3306/lodgingService_sickbasket
+    username: lodgingService_sickbasket
+    password: 4dd1707c680f6a827c0fd0566274c7c31bc75cb1
     hikari:
-      maximum-pool-size: 5
+      maximum-pool-size: 3
 
   jpa:
     show-sql: true
