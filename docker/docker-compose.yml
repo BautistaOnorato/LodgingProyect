@@ -18,6 +18,7 @@ services:
       MYSQL_DATABASE: 'bookingApi-dev'
       MYSQL_USER: 'usr-bookingApi'
       MYSQL_PASSWORD: 'pwd-bookingApi'
+        
       MYSQL_ROOT_PASSWORD: 'pwd-bookingApi'
     ports:
       - '3307:3307'
