@@ -8,7 +8,7 @@ spring:
     username: lodgingService_sickbasket
     password: 4dd1707c680f6a827c0fd0566274c7c31bc75cb1
     hikari:
-      maximum-pool-size: 3
+      maximum-pool-size: 2
 
   jpa:
     show-sql: true
