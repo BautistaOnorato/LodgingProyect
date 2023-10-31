@@ -8,7 +8,7 @@ spring:
     username: u6r9g3vnweca6gen
     password: iJ3aJR98ME771CGOuoEv
     hikari:
-      maximum-pool-size: 5
+      maximum-pool-size: 3
 
   jpa:
     show-sql: true
