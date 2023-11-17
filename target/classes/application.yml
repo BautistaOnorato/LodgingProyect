@@ -8,7 +8,7 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     hikari:
-      maximum-pool-size: 4
+      maximum-pool-size: 2
 
   jpa:
     show-sql: true
