@@ -6,4 +6,5 @@ ENV DB_NAME bjiwgii26ti6lhkxncrd
 ENV DB_PASSWORD iJ3aJR98ME771CGOuoEv
 ENV DB_PORT 3306
 ENV DB_USER u6r9g3vnweca6gen
+ENV PORT 8080
 ENTRYPOINT ["java", "-jar", "/app.jar"]
