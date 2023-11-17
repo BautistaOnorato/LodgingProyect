@@ -81,7 +81,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<systemPropertyVariables>
-						<PORT>9090</PORT>
+						<PORT>8080</PORT>
 						<DB_HOST>bjiwgii26ti6lhkxncrd-mysql.services.clever-cloud.com</DB_HOST>
 						<DB_NAME>bjiwgii26ti6lhkxncrd</DB_NAME>
 						<DB_USER>u6r9g3vnweca6gen</DB_USER>
